@@ -5,3 +5,28 @@
 # Собирающий модуль за один заход, находясь непосредственно перед некоторым кустом, собирает ягоды с этого куста и с двух соседних с ним.
 # Напишите программу для нахождения максимального числа ягод, которое может собрать за один заход собирающий модуль, 
 # находясь перед некоторым кустом заданной во входном файле грядки.
+import random
+
+n = int(input("Введите количество кустов в грядке: "))
+bush = [random.randint(1, 5) for i in range(n)]
+print(bush)
+
+productivity = random.randint(1, 5)
+print(productivity)
+
+gradka = list()
+for i in bush:
+    gradka.append(i*productivity)
+print(gradka)
+
+max = 0
+
+for i in gradka:
+    if i == gradka[0]:
+        max = sum(gradka[:2])+gradka[-1] if sum(gradka[:2])+gradka[-1]> max else max
+    if i == gradka[-1]:
+        max = sum(gradka[len(gradka)-2:])+gradka[0] if sum(gradka[len(gradka)-2:])+gradka[0] > max else max
+    else:
+        max = sum(gradka[i-1:i+2]) if sum(gradka[i-1:i+2]) > max else max
+    
+print(max)
